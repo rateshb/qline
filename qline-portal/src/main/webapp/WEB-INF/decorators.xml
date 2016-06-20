@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2009 - 2012 hCentive Inc. All rights reserved.
+
+-->
+
+<decorators defaultdir="/layouts">
+    <excludes>
+    	<pattern>**/*.html</pattern>
+    	<pattern>**/*.shtml</pattern>
+        <pattern>**/includes/*</pattern>
+        <pattern>**/common/*</pattern>
+    </excludes>
+
+	<!--decorator name="loggedLayout" page="logged_layout.jsp"/-->
+	<decorator name="indexLayout" page="index_layout.jsp"/>
+	<decorator name="error" page="error_layout.jsp"/>
+	
+ </decorators>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app id="babybook" version="2.5"
+	xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+	<display-name>qline</display-name>
+
+	<!--welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list-->
+
+	<context-param>
+		<param-name>spring.profiles.active</param-name>
+		<param-value>product-default</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath*:/META-INF/spring/*.xml
+		</param-value>
+	</context-param>
+	
+	<!-- The following parameter is used to disable html escaping in spring form tld. We are already escaping special characters using XSSFilter.  -->
+	<context-param>
+    	<param-name>defaultHtmlEscape</param-name>
+    	<param-value>false</param-value>
+	</context-param>
+    <filter>
+		<filter-name>sitemesh</filter-name>
+		<filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>sitemesh</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+
+	<!-- Processes application requests -->
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value></param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<jsp-config>
+		<jsp-property-group>
+			<url-pattern>*.jsp</url-pattern>
+			<page-encoding>UTF-8</page-encoding>
+		</jsp-property-group>
+		<!-- taglib>
+			<taglib-uri>http://hcentive.com/googletag</taglib-uri>
+			<taglib-location>/WEB-INF/tld/GoogleTag.tld</taglib-location>
+		</taglib-->
+	</jsp-config>
+
+	<session-config>
+		<session-timeout>45</session-timeout>
+		<cookie-config>
+		  <http-only>true</http-only>
+		 </cookie-config>
+		<tracking-mode>COOKIE</tracking-mode>
+	</session-config>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+</web-app> 

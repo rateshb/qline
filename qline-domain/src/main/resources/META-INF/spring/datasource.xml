@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context 
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/jdbc 
+                           http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<context:component-scan base-package="com.startup.qline.service.impl" />
+
+    <bean id="quizDao" class="com.startup.qline.domain.dao.QuizDaoImpl" />
+    <bean id="questionDao" class="com.startup.qline.domain.dao.DefaultQuestionDao" />
+    
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+		p:entityManagerFactory-ref="entityManagerFactory" />
+
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" />
+		<property name="username" value="qline" />
+		<property name="password" value="qline" />
+	</bean>
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!--property name="persistenceUnitName" value="qline"/-->
+		<property name="packagesToScan"
+			value="com.startup.qline.domain" />
+		<property name="jpaPropertyMap">
+			<map>
+				<entry key="javax.persistence.validation.factory">
+					<bean id="validator"
+						class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+				</entry>
+			</map>
+		</property>
+		<property name="jpaVendorAdapter">
+			<bean id="jpaAdapter"
+				class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="showSql" value="true" />
+				<property name="generateDdl" value="true" />
+				<property name="database" value="ORACLE" />
+				<property name="databasePlatform" value="org.hibernate.dialect.Oracle10gDialect"></property>
+			</bean>
+		</property>
+		<property name="jpaProperties">
+			<props>
+			    <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+			    <prop key="hibernate.transaction.jta.platform">org.hibernate.service.jta.platform.internal.JBossStandAloneJtaPlatform</prop>
+			    <prop key="hibernate.connection.autocommit">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">create</prop>
+				<prop key="org.hibernate.envers.default_schema">false</prop>
+				<prop key="org.hibernate.envers.store_data_at_delete">true</prop>
+				<prop key="org.hibernate.envers.audit_strategy">org.hibernate.envers.strategy.ValidityAuditStrategy
+				</prop>
+				<prop key="hibernate.listeners.envers.autoRegister">false</prop>
+				<prop key="javax.persistence.validation.mode">none</prop>
+				<!--<prop key="org.hibernate.envers.audit_table_suffix">${auditTableSuffix:_aud}</prop> -->
+				<prop
+					key="org.hibernate.envers.audit_strategy_validity_store_revend_timestamp">true</prop>
+				<prop key="hibernate.enable_lazy_load_no_trans">true</prop>
+				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory
+				</prop>
+				<!-- <prop key="hibernate.cache.region.factory_class">com.hazelcast.hibernate.HazelcastCacheRegionFactory</prop> -->
+				<prop key="hibernate.cache.use_second_level_cache">false</prop>
+				<prop key="javax.persistence.sharedCache.mode">ENABLE_SELECTIVE</prop>
+				<prop key="hibernate.cache.default_cache_concurrency_strategy">read-write</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+</beans>
