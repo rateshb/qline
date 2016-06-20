@@ -7,6 +7,9 @@ var app = angular
 				    return $http.pendingRequests.length > 0;
 				  };
 				
+				  //home page
+				  $state.go("start");
+					
 		})
 		.config(function($stateProvider, $urlRouterProvider, $provide, $httpProvider) {
 			//Enable after user log-in implemented
@@ -53,12 +56,13 @@ var app = angular
 						
 					});
 
-					
+			
 		});
 		
 
 app.controller('mainController', [ '$scope', '$http', '$state',
 		'QuizService', function($scope, $http, $state, QuizService) {
 	
-	
+		
+		
 		}]);

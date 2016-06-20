@@ -10,8 +10,8 @@
 				}
 				else {
 					$scope.quiz=data.data.result;
-					$location.path('/addQuestions');
-					//$state.go("addQuestions");
+					//$location.path('/addQuestions');
+					$state.go("addQuestions");
 				}
 			});
 		}

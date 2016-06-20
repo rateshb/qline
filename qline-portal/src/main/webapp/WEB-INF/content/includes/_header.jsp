@@ -19,7 +19,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Quiz Mania <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="${pageContext.request.contextPath}/start">Create a Quiz</a></li>
+            <li><a ui-sref="start">Create a Quiz</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Take a Quiz</a></li>
           </ul>
