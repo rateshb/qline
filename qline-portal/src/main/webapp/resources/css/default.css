@@ -1,0 +1,17 @@
+/* #container {width:980px;height:100%;margin:10px 10px 10px 150px} */
+/* #search{width:150px}
+#header{background:blue}
+div.logo{width:100px}
+.loginBox {float: right;margin-top: 20px; margin-right: 10px}
+ */
+/* New styling */
+body{
+	margin-bottom:150px;
+}
+
+form {
+    box-shadow: 2px 0px 2px #ccc;
+    padding: 20px;
+    border: 2px solid #ccc;
+}
+

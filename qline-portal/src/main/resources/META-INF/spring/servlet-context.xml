@@ -21,14 +21,14 @@
 			StringHttpMessageConverter is required to avoid MappingJackson2HttpMessageConverter from converting a string into json.
 		-->
 		<message-converters>
-			<beans:bean
+<!-- 	<beans:bean
 				class="org.springframework.http.converter.StringHttpMessageConverter">
 			</beans:bean>
-<!-- 			<beans:bean
+ 	 -->				<beans:bean
 				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 				<beans:property name="objectMapper" ref="jacksonObjectMapper"/>
 			</beans:bean>
- -->		
+ 
        </message-converters>
 	</annotation-driven>
 	<resources mapping="/resources/**" location="/resources/" />
@@ -41,8 +41,8 @@
 	<resources mapping="/fonts/**" location="/fonts/" /> 
 	<resources mapping="/styles/**" location="/styles/" /> 
 	
-<!-- 	<beans:bean id="jacksonObjectMapper"
-        class="com.hcentive.utils.ajax.CustomObjectMapper" /> -->
+ 	<beans:bean id="jacksonObjectMapper"
+        class="com.fasterxml.jackson.databind.ObjectMapper" />
 	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/content directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
