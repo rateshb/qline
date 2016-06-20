@@ -5,7 +5,7 @@
 
 -->
 
-<decorators defaultdir="/layouts">
+<decorators defaultdir="/WEB-INF/content/layouts">
     <excludes>
     	<pattern>**/*.html</pattern>
     	<pattern>**/*.shtml</pattern>

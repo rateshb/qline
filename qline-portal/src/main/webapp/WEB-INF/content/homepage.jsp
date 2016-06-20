@@ -16,15 +16,22 @@
 <div id="main">
  <div id="container">
     <div id="name">
-    <form action="start" method="POST">
-      <input type="submit" name="create" value="Create a Quiz" />
-    </form>
-    <form action="findQuiz" method="POST">
-      <input type="text" name="quizCode"/>
-      <input type="submit" name="take" value="Find a Quiz" />
-    </form>
+   
+    <div ui-view="start"></div>
     </div>
   </div>
 </div>
+<script>
+	/* $(document).ready(function(){
+		$('#startForm').on('submit', function(){
+			$.post({
+				data:$('#startForm').serialize(),
+				url:
+			});
+			
+		});		
+	});
+ */
+</script>
 </body>
 </html>

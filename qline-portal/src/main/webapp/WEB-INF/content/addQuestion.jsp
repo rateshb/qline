@@ -1,6 +1,6 @@
 <%@page import="com.startup.qline.domain.TypeOfAnswer"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
@@ -14,41 +14,31 @@
 </head>
 
 <body>
-<div id="main">
- <div id="container">
-    <div id="form">
-    <form:form modelAttribute="questionModel" action="addQuestion">
-      <div>${quiz.name}</div>
-      <div>${quiz.category}</div>
-      <form:hidden name="quizId" path="question.quiz.id"/>
-      <div>
-         <c:if test="${not empty questions}">
-         <c:forEach items="${questions}" var="quest">
-            <div>${quest.questionContent}</div>
-         </c:forEach>
-         </c:if>
-      </div>
-      <div><s:message code="label.question.content" text="Type your Question here"/><form:input path="question.questionContent"/></div>
-      <div><s:message code="label.question.comment" text="Comments / Hints"/><form:input path="question.comments"/></div>
-      <div><s:message code="label.question.type" text="Type of Answer"/>
-      <form:select path="question.answerType">
-      <form:options items="<%=TypeOfAnswer.values()%>"/>
-      </form:select>
-      </div>
-      <div> <s:message code="label.answers.header" text="Type your options below"/>
-        <c:forEach begin="1" end="5" varStatus="status">
-        <div><s:message code="label.option.${status.count}" text="Option ${status.count} "/>
-             <form:input path="options[${status.count}].answer"/>
-             <form:input path="options[${status.count}].marks"/>
-        </div>
-      </c:forEach>
-      </div>
-      <div><input type="submit" style="width:100px;height:30px" id="addQues" name="Add Question" value="Add Question"/></div>
-    </form:form>
-   
-    </div>
-  </div>
- 
-</div>
+	<div id="main">
+		<div id="container">
+			<div id="form">
+				
+			</div>
+		</div>
+
+	</div>
+
+	<script>
+		$(document).ready(function() {
+			$('#addQuestionForm').on('submit', function() {
+				$.post({
+					url : '${pageContext.request.contextPath}/addQuestion',
+					data : $('#addQuestionForm').serialize(),
+					success : function() {
+						window.location.reload();
+					},
+					error : function(ex) {
+						console.log(ex);
+						alert("An error has occured. Please try again later.");
+					}
+				});
+			});
+		});
+	</script>
 </body>
 </html>
