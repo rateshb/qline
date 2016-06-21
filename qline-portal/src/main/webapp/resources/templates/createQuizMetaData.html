@@ -1,29 +1,35 @@
 
-<form id="createQuizForm" >
+<form id="createQuizForm">
+	<h2>Create Quiz</h2>
 	<div class="form-group">
-		<label> Quiz Name </label> <input class="form-control" type="text"
-			ng-model="quiz.name" />
+		<label> Quiz Name <input class="form-control" type="text"
+			ng-model="quiz.name" /></label>
 	</div>
 	<div class="form-group">
-		<label ng-model="quiz.category"> Category </label> <input
-			class="form-control" type="text" ng-model="quiz.category" />
+		<label> Category <input class="form-control" type="text"
+			ng-model="quiz.category" /></label>
 	</div>
 	<div class="form-group">
-		<label ng-model="quiz.subCategory"> Sub Category </label> <input
-			class="form-control" type="text" ng-model="quiz.subCategory" />
+		<label> Sub Category <input class="form-control" type="text"
+			ng-model="quiz.subCategory" />
+	</div>
+	</label>
+	<div class="form-group">
+		<label> Type of Quiz <input class="form-control" type="text"
+			ng-model="quiz.typeOfQuiz" /></label>
 	</div>
 	<div class="form-group">
-		<label ng-model="quiz.typeOfQuiz"> Type of Quiz </label> <input
-			class="form-control" type="text" ng-model="quiz.typeOfQuiz" />
+		<label> Number of Questions <input type="number"
+			class="form-control" ng-model="quiz.noOfQuestions" /></label>
 	</div>
 	<div class="form-group">
-		<label ng-model="quiz.noOfQuestions"> Number of Questions </label> <input type="number"
-			class="form-control" ng-model="quiz.noOfQuestions" />
+
+		<label> <input type="checkbox" class="form-control-inline"
+			ng-model="quiz.markingRequired" /> Marking Required
+
+		</label>
+
 	</div>
-	<div class="form-group">
-		<label ng-model="quiz.markingRequired"> Is Marking Required </label>
-		<input type="checkbox" class="form-control" ng-model="quiz.markingRequired"
-			value="true" />
-	</div>
-	<input type="submit" class="btn btn-success" value="Create a Quiz" ng-click="submitQuiz()"/>
+	<input type="submit" class="btn btn-success" value="Create a Quiz"
+		ng-click="submitQuiz()" />
 </form>

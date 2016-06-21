@@ -28,13 +28,6 @@ public class QuestionController {
 	private QuizService quizService;
 	
 	//private QuestionarieService questionarieService;
-
-//	@RequestMapping(value="/start", method={RequestMethod.POST,RequestMethod.GET})
-//	public String startCreating(HttpServletRequest request,Model model) {
-//		Quiz quiz = new Quiz();
-//		model.addAttribute("quiz", quiz);
-//		return "create";
-//	}
 	
 	@RequestMapping(value="/addQuestion", method=RequestMethod.POST)
 	public String submitQuestion(HttpServletRequest request,Model model,

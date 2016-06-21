@@ -32,11 +32,11 @@
         
       </ul>
       
-      <ul class="nav navbar-nav navbar-right">
+      <!-- <ul class="nav navbar-nav navbar-right">
         <li>Welcome User!</li>
         <li>&nbsp;|&nbsp;</li>
         <li>Logout</li>
-      </ul>
+      </ul> -->
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
