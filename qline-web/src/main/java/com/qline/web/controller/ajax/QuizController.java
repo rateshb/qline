@@ -9,11 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.qline.web.json.JsonRpc;
 import com.qline.web.model.InvitationModel;
-import com.qline.web.model.QuestionAnswerModel;
 import com.startup.qline.domain.Quiz;
 import com.startup.qline.service.QuizService;
 
@@ -52,4 +52,14 @@ public class QuizController {
 		model.addAttribute("invitationModel", new InvitationModel());
 		return "showQuiz";
 	}
+	
+	@RequestMapping(value="/getQuizById", method=RequestMethod.GET)
+	@Transactional
+	public @ResponseBody JsonRpc<Quiz> getQuizById(HttpServletRequest request,
+			@RequestParam String id) {
+		
+		Quiz quiz = quizService.load(Long.parseLong(id));
+		return new JsonRpc<Quiz>(quiz);
+	} 
+	
 }

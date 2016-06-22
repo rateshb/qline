@@ -34,8 +34,8 @@ var app = angular
 			 	*/
 			
 			$urlRouterProvider.when('/start', '/start');
-			$urlRouterProvider.when('', '/home');		
-			$urlRouterProvider.otherwise("/home");
+			$urlRouterProvider.when('', '/start');		
+			$urlRouterProvider.otherwise("/start");
 			$stateProvider
 					.state('start', {
 						url : '/start',
@@ -47,7 +47,7 @@ var app = angular
 						
 					})
 					.state('addQuestions', {
-						url : '/addQuestions',
+						url : '/:quizId/addQuestions',
 						views:{
 							"start" :{ controller : 'QuizController',
 										templateUrl : 'resources/templates/addQuestions.html'
