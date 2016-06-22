@@ -19,7 +19,14 @@ form {
 h2 {
 	color:#4cae4c;
 }
-.row {
+
+.answerOptionTpl input{
+	margin-bottom:5px;
+}
+
+.answerOptionTpl{
+	margin-bottom:10px;
+}.row {
   margin-left: -20px;
   *zoom: 1;
 }

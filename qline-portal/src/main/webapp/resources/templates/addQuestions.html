@@ -1,7 +1,8 @@
-<h2>Add Questions</h2>
+
 <form id="addQuestionForm">
-	<h2 ng-bind="quiz.name"></h2>
-	<h4 ng-bind="quiz.category"></h4>
+<h2>Add Questions for '{{quiz.name}}' Quiz</h2>
+	<!-- <h2 ng-bind="quiz.name"></h2>
+	<h4 ng-bind="quiz.category"></h4> -->
 	<div class="form-group">
 		Type your Question here <input type="text"
 			ng-model="question.questionContent" class="form-control" />
@@ -15,7 +16,27 @@
 			<option value="{{type}}" ng-repeat="type in answerType">{{type}}</option>
 		</select>
 	</div>
-	<div class="form-group">
+	<div class="form-group" ng-switch on="question.answerType">
+		<div ng-switch-when="SUBJECTIVE">
+			<input type="text" placeholder="answer" ng-model="question.options[0].answer" class="form-control" />
+			<input type="number" placeholder="marks" ng-model="question.options[0].marks" class="form-control" />
+		</div>
+		<div ng-switch-when="OBJECTIVE_SINGLE_CHOICE">
+				<input type="text" placeholder="answer" ng-model="question.options[0].answer" class="form-control" />
+				<input type="number" placeholder="marks" ng-model="question.options[0].marks" class="form-control" />
+				</div>
+				<input type="text" placeholder="answer" ng-model="question.options[1].answer" class="form-control" />
+				<input type="number" placeholder="marks" ng-model="question.options[1].marks" class="form-control" />
+				</div>
+				<input type="text" placeholder="answer" ng-model="question.options[2].answer" class="form-control" />
+				<input type="number" placeholder="marks" ng-model="question.options[2].marks" class="form-control" />
+				</div>
+				<input type="text" placeholder="answer" ng-model="question.options[3].answer" class="form-control" />
+				<input type="number" placeholder="marks" ng-model="question.options[3].marks" class="form-control" />
+				</div>
+		</div>
+		<div ng-switch-default></div>
+		
 		<!-- Type your options below -->
 		<!-- <c:forEach begin="1" end="5" varStatus="status">
 							<div>
