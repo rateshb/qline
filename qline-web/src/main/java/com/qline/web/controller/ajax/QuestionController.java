@@ -6,9 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,35 +28,7 @@ public class QuestionController {
 	@Autowired
 	private QuizService quizService;
 	
-	@RequestMapping(value="/addQuestion", method=RequestMethod.GET)
-	public String getAddQuestion(HttpServletRequest request,Model model) {
-		String quizCode = request.getParameter("quizCode");
-		Quiz quiz = quizService.loadQuiz(quizCode);
-		List<Question> questions = questionarieService.loadQuestions(quiz.getId());
-		
-		QuestionAnswerModel questionModel = new QuestionAnswerModel();
-		questionModel.getQuestion().setQuiz(quiz);
-		
-		model.addAttribute("quiz", quiz);
-		model.addAttribute("questionModel", questionModel);
-		model.addAttribute("questions", questions);
-		
-		return "addQuestion";
-	}
-	
-	@RequestMapping(value="/addQuestion", method=RequestMethod.POST)
-	public String submitQuestion(HttpServletRequest request,Model model,
-			@ModelAttribute(value="questionModel") QuestionAnswerModel questionAnswerModel) {
-		
-		Question question = questionAnswerModel.getQuestion();
-		question.setOptions(questionAnswerModel.getOptions());
-
-		Quiz attachQuiz = quizService.load(question.getQuiz().getId());
-		question.setQuiz(attachQuiz);
-		questionarieService.createQuestion(question);
-		
-		return "redirect:/addQuestion?quizCode="+attachQuiz.getQuizCode();
-	}
+	//private QuestionarieService questionarieService;
 	
 	@RequestMapping(value="/addQuestion", method=RequestMethod.POST)
 	public @ResponseBody JsonRpc<List<Question>> submitQuestion(HttpServletRequest request,Model model,
