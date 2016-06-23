@@ -8,11 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.qline.web.json.JsonRpc;
 import com.qline.web.model.InvitationModel;
-import com.qline.web.model.QuestionAnswerModel;
 import com.startup.qline.domain.Quiz;
 import com.startup.qline.service.QuizService;
 
@@ -39,6 +41,17 @@ public class QuizController {
 		return "redirect:/addQuestion?quizCode="+updatedQuiz.getQuizCode();
 	}
 	
+	@RequestMapping(value="/submitQuiz", method=RequestMethod.POST)
+	@Transactional
+	public @ResponseBody JsonRpc<Quiz> submitQuiz(HttpServletRequest request,
+			@RequestBody Quiz quiz) {
+		Quiz updatedQuiz = quizService.createQuiz(quiz);
+		//QuestionAnswerModel questionModel = new QuestionAnswerModel();
+		//questionModel.getQuestion().setQuiz(updatedQuiz);
+		//model.addAttribute("quiz", updatedQuiz);
+		//model.addAttribute("questionModel", questionModel);
+		return new JsonRpc<Quiz>(updatedQuiz);
+	}
 	
 	@RequestMapping(value="/findQuiz", method=RequestMethod.POST)
 	@Transactional
