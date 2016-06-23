@@ -1,23 +1,23 @@
-<form  id="addQuestionForm">
-					<div ng-bind="quiz.name"></div>
-					<div ng-bind="quiz.category"></div>
-					<div class="form-group">
-						Type your Question here
-						<input type="text" ng-model="quiz.question.questionContent" class="form-control" />
-					</div>
-					<div class="form-group">
-						Comments / Hints
-						<input type="text" ng-model="quiz.question.comments" class="form-control" />
-					</div>
-					<!--  <div class="form-group">
-						Type of Answer
-						<select ng-model="quiz.question.answerType" class="form-control" ng-repeat="value in typeOfAnswer">
-						
-						</select>
-					</div> -->
-					<div class="form-group">
-						<!-- Type your options below -->
-						<!-- <c:forEach begin="1" end="5" varStatus="status">
+<h2>Add Questions</h2>
+<form id="addQuestionForm">
+	<h2 ng-bind="quiz.name"></h2>
+	<h4 ng-bind="quiz.category"></h4>
+	<div class="form-group">
+		Type your Question here <input type="text"
+			ng-model="question.questionContent" class="form-control" />
+	</div>
+	<div class="form-group">
+		Comments / Hints <input type="text" ng-model="question.comments"
+			class="form-control" />
+	</div>
+	<div class="form-group">
+		Type of Answer <select ng-model="question.answerType" class="form-control">
+			<option value="{{type}}" ng-repeat="type in answerType">{{type}}</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<!-- Type your options below -->
+		<!-- <c:forEach begin="1" end="5" varStatus="status">
 							<div>
 								<s:message code="label.option.${status.count}"
 									text="Option ${status.count} " />
@@ -27,10 +27,9 @@
 									class="form-control" />
 							</div>
 						</c:forEach> -->
-					</div>
-					<div class="form-group">
-						<input type="submit" class="btn btn-success"
-							 id="addQues"
-							 value="Add Question" ng-click="addQuestions()"/>
-					</div>
-				</form>
+	</div>
+	<div class="form-group">
+		<input type="submit" class="btn btn-success" id="addQues"
+			value="Add Question" ng-click="addQuestions()" />
+	</div>
+</form>

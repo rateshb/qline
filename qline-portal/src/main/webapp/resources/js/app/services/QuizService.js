@@ -9,7 +9,13 @@ app.service("QuizService", ["$http", function($http){
 		}
 		
 		this.addQuestions = function(data){
-			return $http.post("addQuestions", data,{});
+			return $http.post("addQuestion", data,{});
+		}
+		
+		this.getQuizById = function(id){
+			if(id) {
+				return $http.get("getQuizById", {params:{id:id}});
+			}
 		}
 	}]);
 
