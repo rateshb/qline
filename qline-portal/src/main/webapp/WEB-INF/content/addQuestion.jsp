@@ -30,7 +30,7 @@
 									
 				<!--div class="form-group">${quiz.name}</div>
 				<div class="form-group">${quiz.category}</div-->
-				<form:form modelAttribute="questionModel" action="addQuestion">
+				<form:form modelAttribute="questionModel" action="addQuestionN">
 					<form:hidden name="quizId" path="question.quiz.id" />
 					<div class="form-group">
 						<label><s:message code="label.question.content"

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,6 +28,7 @@ public class QuizController {
 	public String startCreating(HttpServletRequest request,Model model) {
 		Quiz quiz = new Quiz();
 		model.addAttribute("quiz", quiz);
+		request.getParameter("stn");
 		return "create";
 	}
 	
@@ -42,6 +44,15 @@ public class QuizController {
 		return new JsonRpc<Quiz>(updatedQuiz);
 	}
 	
+	@RequestMapping(value="/submitQuizN", method=RequestMethod.POST)
+	@Transactional
+	public String submitQuiz(HttpServletRequest request, Model model,
+			@ModelAttribute("quiz") Quiz quiz) {
+		Quiz updatedQuiz = quizService.createQuiz(quiz);
+//		request.setAttribute("quiz", updatedQuiz);
+//		request.setAttribute("questionModel", questionModel);
+		return "redirect:/addQuestion?quizCode="+updatedQuiz.getQuizCode();
+	}
 	
 	@RequestMapping(value="/findQuiz", method=RequestMethod.POST)
 	@Transactional

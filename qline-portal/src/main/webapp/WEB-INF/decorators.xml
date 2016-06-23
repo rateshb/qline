@@ -14,6 +14,7 @@
     </excludes>
 
 	<!--decorator name="loggedLayout" page="logged_layout.jsp"/-->
+	<decorator name="indexLayoutN" page="index_layout_n.jsp"/>
 	<decorator name="indexLayout" page="index_layout.jsp"/>
 	<decorator name="error" page="error_layout.jsp"/>
 	

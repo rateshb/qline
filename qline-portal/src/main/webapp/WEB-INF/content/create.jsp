@@ -16,7 +16,7 @@
 <div id="main">
  <div id="container">
     <div id="form">
-    <form:form modelAttribute="quiz" action="submitQuiz">
+    <form:form modelAttribute="quiz" action="submitQuizN">
       <div class="form-group">
          <form:label path="name"><s:message code="label.quiz.name" text="Quiz Name"/></form:label>
          <form:input class="form-control" type="text" path="name" name="Quiz Name" />
