@@ -27,7 +27,21 @@ public class QuestionController {
 	@Autowired
 	private QuizService quizService;
 	
-	//private QuestionarieService questionarieService;
+	@RequestMapping(value="/addQuestion", method=RequestMethod.GET)
+	public String getAddQuestion(HttpServletRequest request,Model model) {
+		String quizCode = request.getParameter("quizCode");
+		Quiz quiz = quizService.loadQuiz(quizCode);
+		List<Question> questions = questionarieService.loadQuestions(quiz.getId());
+		
+		QuestionAnswerModel questionModel = new QuestionAnswerModel();
+		questionModel.getQuestion().setQuiz(quiz);
+		
+		model.addAttribute("quiz", quiz);
+		model.addAttribute("questionModel", questionModel);
+		model.addAttribute("questions", questions);
+		
+		return "addQuestion";
+	}
 	
 	@RequestMapping(value="/addQuestion", method=RequestMethod.POST)
 	public String submitQuestion(HttpServletRequest request,Model model,
@@ -40,15 +54,6 @@ public class QuestionController {
 		question.setQuiz(attachQuiz);
 		questionarieService.createQuestion(question);
 		
-		List<Question> questions = questionarieService.loadQuestions(attachQuiz.getId());
-		
-		QuestionAnswerModel questionModel = new QuestionAnswerModel();
-		questionModel.getQuestion().setQuiz(attachQuiz);
-		
-		model.addAttribute("quiz", attachQuiz);
-		model.addAttribute("questionModel", questionModel);
-		model.addAttribute("questions", questions);
-		
-		return "addQuestion";
+		return "redirect:/addQuestion?quizCode="+attachQuiz.getQuizCode();
 	}
 }

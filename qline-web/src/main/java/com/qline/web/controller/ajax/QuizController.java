@@ -2,16 +2,15 @@ package com.qline.web.controller.ajax;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.qline.web.json.JsonRpc;
 import com.qline.web.model.InvitationModel;
 import com.qline.web.model.QuestionAnswerModel;
 import com.startup.qline.domain.Quiz;
@@ -32,14 +31,12 @@ public class QuizController {
 	
 	@RequestMapping(value="/submitQuiz", method=RequestMethod.POST)
 	@Transactional
-	public @ResponseBody JsonRpc<Quiz> submitQuiz(HttpServletRequest request,
-			@RequestBody Quiz quiz) {
+	public String submitQuiz(HttpServletRequest request, Model model,
+			@ModelAttribute("quiz") Quiz quiz) {
 		Quiz updatedQuiz = quizService.createQuiz(quiz);
-		//QuestionAnswerModel questionModel = new QuestionAnswerModel();
-		//questionModel.getQuestion().setQuiz(updatedQuiz);
-		//model.addAttribute("quiz", updatedQuiz);
-		//model.addAttribute("questionModel", questionModel);
-		return new JsonRpc<Quiz>(updatedQuiz);
+//		request.setAttribute("quiz", updatedQuiz);
+//		request.setAttribute("questionModel", questionModel);
+		return "redirect:/addQuestion?quizCode="+updatedQuiz.getQuizCode();
 	}
 	
 	
@@ -47,9 +44,13 @@ public class QuizController {
 	@Transactional
 	public String findQuiz(HttpServletRequest request,Model model) {
 		String quizCode = request.getParameter("quizCode");
-		Quiz quiz = quizService.loadQuiz(quizCode);
-		model.addAttribute("loadedQuiz", quiz);
-		model.addAttribute("invitationModel", new InvitationModel());
-		return "showQuiz";
+		if(StringUtils.isNotEmpty(quizCode)) {
+			Quiz quiz = quizService.loadQuiz(quizCode);
+			model.addAttribute("loadedQuiz", quiz);
+			model.addAttribute("invitationModel", new InvitationModel());
+			return "showQuiz";
+		} 
+		
+		return "/";
 	}
 }

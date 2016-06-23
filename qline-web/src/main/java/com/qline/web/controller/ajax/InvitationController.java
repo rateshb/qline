@@ -24,4 +24,15 @@ public class InvitationController {
 		
 		return "redirect:/";
 	}
+	
+	@RequestMapping(value="inviteGetFriends", method=RequestMethod.GET)
+	public String inviteGetFriends(HttpServletRequest request) {
+		
+		InvitationModel invitationModel = new InvitationModel();
+		invitationModel.setQuizCode("Test");
+		invitationModel.setInviteByEmail("test@test.com");
+		invitationService.inviteFriends(invitationModel.getQuizCode(), invitationModel.getInviteByEmail());
+		
+		return "redirect:/";
+	}
 }

@@ -16,22 +16,32 @@
 <div id="main">
  <div id="container">
     <div id="name">
-   
-    <div ui-view="start"></div>
+    <form id="createQuizForm" method="POST">
+    <div class="form-group">
+      <input class="form-control" type="text" name="quizCode"/>
+     </div> 
+     <div class="form-group">
+      <input class="btn btn-success" id="takeAQuiz" type="button" name="take" value="Take a Quiz" />
+      <input class="btn btn-success" id="createQuiz" type="button" name="create" value="Create a Quiz" />
+     </div>
+     </form>
+    <!--div ui-view="start"></div-->
     </div>
   </div>
 </div>
 <script>
-	/* $(document).ready(function(){
-		$('#startForm').on('submit', function(){
-			$.post({
-				data:$('#startForm').serialize(),
-				url:
-			});
-			
-		});		
+	$(document).ready(function(){
+		$('#createQuiz').on('click', function(){
+			var defaultForm = $('#createQuizForm');
+			defaultForm.attr('action','start');
+			defaultForm.submit();
+		});	
+		$('#takeAQuiz').on('click', function(){
+			var defaultForm = $('#createQuizForm');
+			defaultForm.attr('action','findQuiz');
+			defaultForm.submit();
+		});	
 	});
- */
 </script>
 </body>
 </html>

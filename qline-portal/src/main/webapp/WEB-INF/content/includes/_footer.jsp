@@ -14,7 +14,7 @@
 
 	<div id="footer-container" class="clearfix val">
 		<ul class="nav navbar-nav">
-			<li><a href="#">Quiz Master Copyrighted 2016</a></li>
+			<li><a href="#">QLine Copyrighted 2016</a></li>
 			<li><a href="#">Version:1.0</a></li>
 			
 		</ul>

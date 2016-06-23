@@ -8,12 +8,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Quiz Master</a>
+      <a class="navbar-brand" href="home">QLine</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
+      <!--ul class="nav navbar-nav">
         <li><a href="#">Home</a></li>
         
         <li class="dropdown">
@@ -30,13 +30,13 @@
         <li><a href="#">Services</a></li>
         <li><a href="#">About Us</a></li>
         
-      </ul>
+      </ul-->
       
-      <!-- <ul class="nav navbar-nav navbar-right">
-        <li>Welcome User!</li>
-        <li>&nbsp;|&nbsp;</li>
-        <li>Logout</li>
-      </ul> -->
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Sign Up</a></li>
+        <li style='padding-top:15px'>&nbsp;|&nbsp;</li>
+        <li><a href="#">Sign In</a></li>
+      </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
