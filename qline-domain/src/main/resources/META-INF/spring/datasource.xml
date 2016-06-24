@@ -18,6 +18,7 @@
     <bean id="quizDao" class="com.startup.qline.domain.dao.QuizDaoImpl" />
     <bean id="questionDao" class="com.startup.qline.domain.dao.DefaultQuestionDao" />
     <bean id="invitationDao" class="com.startup.qline.domain.dao.DefaultInvitationDao" />
+    <bean id="userDao" class="com.startup.qline.domain.dao.DefaultUserDao" />
     
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
 		p:entityManagerFactory-ref="entityManagerFactory" />
