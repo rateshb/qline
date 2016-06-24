@@ -19,18 +19,10 @@
 			<div id="form">
 
              <jsp:include page="./includes/_quizDetailsPanel.jsp"/>
-
-					<div>
-						<c:if test="${not empty questions}">
-							<c:forEach items="${questions}" var="quest">
-								<div>${quest.questionContent}</div>
-							</c:forEach>
-						</c:if>
-					</div>
-									
+			<jsp:include page="./includes/_questionListPanel.jsp"/>
 				<!--div class="form-group">${quiz.name}</div>
 				<div class="form-group">${quiz.category}</div-->
-				<form:form modelAttribute="questionModel" action="addQuestionN">
+				<form:form id="addQuestionForm" modelAttribute="questionModel" action="addQuestionN">
 					<form:hidden name="quizId" path="question.quiz.id" />
 					<div class="form-group">
 						<label><s:message code="label.question.content"
@@ -57,8 +49,8 @@
 							<div class="form-group">
 								<label><s:message code="label.option.${status.count}"
 										text="Option ${status.count} " /></label>
-								<form:input path="options[${status.count}].answer" />
-								<form:input path="options[${status.count}].marks" />
+								<form:input path="options[${status.count -1}].answer" />
+								<form:input path="options[${status.count - 1}].marks" />
 							</div>
 						</c:forEach>
 					</div>
@@ -67,6 +59,10 @@
 							name="Add Question" value="Add Question" />
 					</div>
 				</form:form>
+				<c:if test="${quiz.status != 'COMPLETE'}">
+				  <input type="button" class="btn btn-success" id="completeQuiz"
+							name="Complete Quiz" value="Complete Quiz" />
+				</c:if>
 			</div>
 		</div>
 
@@ -74,15 +70,14 @@
 
 	<script>
 		$(document).ready(function() {
-			$('#addQuestionForm').on('submit', function() {
+			$('#completeQuiz').on('click', function() {
 				$.post({
-					url : '${pageContext.request.contextPath}/addQuestion',
-					data : $('#addQuestionForm').serialize(),
+					url : '${pageContext.request.contextPath}/completeQuiz',
+					data : {quizId:$('#quizId')},
 					success : function() {
 						window.location.reload();
 					},
 					error : function(ex) {
-						console.log(ex);
 						alert("An error has occured. Please try again later.");
 					}
 				});

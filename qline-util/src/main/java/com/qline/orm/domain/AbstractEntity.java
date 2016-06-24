@@ -21,10 +21,10 @@ public abstract class AbstractEntity implements Serializable {
 	 */
 	private static final long serialVersionUID = 2400066944083776138L;
 
-	@Column(name = "created_by")
+	@Column(name = "CREATED_BY")
 	private String createdBy;
 	
-	@Column(name = "updated_by")
+	@Column(name = "UPDATED_BY")
 	private String updatedBy;
 	
 	@Column(name="CREATED_ON")

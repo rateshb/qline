@@ -33,9 +33,9 @@
       </ul-->
       
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Sign Up</a></li>
+        <li><a href="signup">Sign Up</a></li>
         <li style='padding-top:15px'>&nbsp;|&nbsp;</li>
-        <li><a href="#">Sign In</a></li>
+        <li><a href="doLogin">Sign In</a></li> 
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

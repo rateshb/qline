@@ -18,7 +18,7 @@
     <div id="name">
     <form id="createQuizForm" method="POST">
     <div class="form-group">
-      <input class="form-control" type="text" name="quizCode"/>
+      <input class="form-control" type="text" name="invitationCode"/>
      </div> 
      <div class="form-group">
       <input class="btn btn-success" id="takeAQuiz" type="button" name="take" value="Take a Quiz" />
@@ -38,7 +38,7 @@
 		});	
 		$('#takeAQuiz').on('click', function(){
 			var defaultForm = $('#createQuizForm');
-			defaultForm.attr('action','findQuiz');
+			defaultForm.attr('action','takeAQuiz');
 			defaultForm.submit();
 		});	
 	});

@@ -16,35 +16,15 @@
 <div id="main">
  <div id="container">
     <div id="form">
-      <div>
-         <label><s:message code="label.quiz.name" text="Quiz Name"/></label>
-         <label>${loadedQuiz.name}</label>
-      </div><div>
-         <label><s:message code="label.quiz.category" text="Category"/></label>
-         <label>${loadedQuiz.category}</label>
-      </div>
-      <div>
-         <label><s:message code="label.quiz.subCategory" text="Sub Category"/></label>
-         <label>${loadedQuiz.subCategory}</label>
-      </div>
-      <div>
-         <label><s:message code="label.quiz.typeOfQuiz" text="Type of Quiz"/></label>
-         <label>${loadedQuiz.typeOfQuiz}</label>
-      </div>
-      <div>
-         <label><s:message code="label.quiz.noOfQuestions" text="Number of Questions"/></label>
-         <label>${loadedQuiz.noOfQuestions}</label>
-      </div>
-      <div>
-         <label><s:message code="label.quiz.markingRequired" text="Is Marking Required"/></label>
-         <label>${loadedQuiz.markingRequired}</label>
-      </div>
-    <form:form modelAttribute="invitationModel" action="inviteFriends">
-      <form:textarea path="inviteByEmail"/>
-      <form:hidden path="quizCode" value="${loadedQuiz.quizCode}"/>
-      <input type="submit" name="Invite Friends" value="Invite Friends" />
+      <jsp:include page="./includes/_quizDetailsPanel.jsp"></jsp:include>
+      
+      
+    <form:form modelAttribute="quiz" action="startQuiz" target="_blank" onClick="window.open('startQuiz?ic=${invitationCode}','_blank', config='height=100,width=400, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, directories=no, status=no' )">
+      <input type="hidden" name="invitationCode" value="${invitationCode}"/>
+      
+      <input type="submit" name="Start Quiz" value="Start Quiz" />
     </form:form>
-   
+   <!--  -->
     </div>
   </div>
  

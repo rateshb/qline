@@ -7,9 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.qline.orm.domain.AbstractEntity;
+
 @Entity
 @Table(name="ANSWER_OPTION")
-public class AnswerOption {
+public class AnswerOption extends AbstractEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

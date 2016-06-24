@@ -5,12 +5,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import com.qline.orm.domain.AbstractEntity;
 
 @Entity
 @Table(name="USER_DATA")
+@NamedQueries(value={
+		@NamedQuery(name="user.findByUsername", query="select u from User u where u.username=:username")
+})
 public class User extends AbstractEntity {
 
 	/**
@@ -37,6 +42,9 @@ public class User extends AbstractEntity {
 	@Column(name="USERNAME", length=255)
 	private String username;
 
+	@Column(name="PASSWORD")
+	private String password;
+	
 	public Long getId() {
 		return id;
 	}
@@ -83,6 +91,14 @@ public class User extends AbstractEntity {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.startup.qline.domain.Quiz;
+import com.startup.qline.domain.QuizStatus;
 import com.startup.qline.domain.dao.QuizDao;
 import com.startup.qline.service.QuizService;
 
@@ -33,6 +34,14 @@ public class DefaultQuizService implements QuizService {
 	@Override
 	public Quiz loadQuiz(String quizCode) {
 		return quizDao.loadByQuizCode(quizCode);
+	}
+
+	@Override
+	public Quiz markCompleteQuiz(Quiz quiz) {
+		quiz.setStatus(QuizStatus.COMPLETE);
+		quizDao.update(quiz);
+		
+		return quiz;
 	}
 	
 }

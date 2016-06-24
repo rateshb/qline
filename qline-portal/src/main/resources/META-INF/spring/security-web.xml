@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:security="http://www.springframework.org/schema/security"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	<bean id="daoAuthenticationProvider"
+		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+		<property name="userDetailsService" ref="userService" />
+		<property name="hideUserNotFoundExceptions" value="false" />
+		<property name="passwordEncoder" ref="jasyptPasswordEncoder" />
+		<property name="postAuthenticationChecks">
+			<bean class="com.qline.util.auth.NullUserChecker" />
+		</property>
+	</bean>
+
+	<bean id="authenticationManager"
+		class="org.springframework.security.authentication.ProviderManager">
+		<property name="providers">
+			<list>
+				<ref local="daoAuthenticationProvider" />
+			</list>
+		</property>
+		<property name="eraseCredentialsAfterAuthentication" value="false" />
+		<property name="authenticationEventPublisher" ref="authEventPublisher"/>
+	</bean>
+	
+	<bean id="authEventPublisher" class="org.springframework.security.authentication.DefaultAuthenticationEventPublisher" />
+	
+	<bean id="logoutSuccessHandler"
+		class="org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler">
+		<property name="targetUrlParameter" value="ru" />
+		<property name="defaultTargetUrl" value="/home"/>
+	</bean>
+
+	<bean id="authenticationSuccessHandler"
+		class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+		<property name="defaultTargetUrl" value="/home" />
+		<property name="targetUrlParameter" value="ru/" />
+	</bean>
+	
+	<bean id="sas" class="org.springframework.security.web.authentication.session.SessionFixationProtectionStrategy">
+		<property name="migrateSessionAttributes" value="false"></property>
+	</bean>
+
+	<bean id="authenticationProcessingFilter"
+		class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+		<property name="sessionAuthenticationStrategy" ref="sas" />
+		<property name="authenticationManager" ref="authenticationManager" />
+		<property name="filterProcessesUrl" value="/login" />
+		<property name="authenticationFailureHandler">
+			<bean
+				class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+				<constructor-arg value="/doLogin?login_error=1" />
+			</bean>
+		</property>
+		<property name="authenticationSuccessHandler" ref="authenticationSuccessHandler" />
+	</bean>
+
+	<bean id="contextHolderAwareRequestFilter"
+		class="org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter" />
+
+	<bean id="defaultEntryPoint"
+		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<property name="loginFormUrl" value="/" />
+	</bean>
+
+	<bean id="daep"
+		class="org.springframework.security.web.authentication.DelegatingAuthenticationEntryPoint">
+		<constructor-arg>
+			<map>
+				<entry key="hasHeader('User-Agent','MSIE')" value-ref="defaultEntryPoint" />
+			</map>
+		</constructor-arg>
+		<property name="defaultEntryPoint" ref="defaultEntryPoint" />
+	</bean>
+
+    <bean id="springSecurityFilterChain" class="org.springframework.security.web.FilterChainProxy">
+		<security:filter-chain-map path-type="ant">
+			<security:filter-chain pattern="/css/**" filters="none" />
+			<security:filter-chain pattern="/js/**" filters="none" />
+			<security:filter-chain pattern="/images/**" filters="none" />
+			<security:filter-chain pattern="/fonts/**" filters="none" />
+			<security:filter-chain pattern="/static/**" filters="none" />		
+			<security:filter-chain pattern="/libs/**" filters="none" />	
+            <security:filter-chain pattern="/global/**" filters="none" />
+            	
+			<security:filter-chain pattern="/**" filters="integrationFilter, sessionMgmtFilter, exceptionTranslationFilter, authenticationProcessingFilter," />
+		</security:filter-chain-map>
+	</bean>
+	
+		<bean id="integrationFilter"
+		class="org.springframework.security.web.context.SecurityContextPersistenceFilter">
+		<property name='securityContextRepository' ref="httpSessionSecurityContextRepository" />
+	</bean>
+	
+		<bean id="httpSessionSecurityContextRepository" class="org.springframework.security.web.context.HttpSessionSecurityContextRepository"></bean>
+	<bean id="sessionMgmtFilter"
+		class="org.springframework.security.web.session.SessionManagementFilter">
+		<constructor-arg name="securityContextRepository"
+			ref="httpSessionSecurityContextRepository" />
+		<property name="sessionAuthenticationStrategy" ref="sas" />
+	</bean>
+	
+	
+	<bean id="exceptionTranslationFilter"
+		class="org.springframework.security.web.access.ExceptionTranslationFilter">
+		<property name="authenticationEntryPoint" ref="daep" />
+	</bean>
+
+	<!-- bean id="webPrivilegeEvaluator" class="org.springframework.security.web.access.DefaultWebInvocationPrivilegeEvaluator">
+    	<constructor-arg ref="filterSecurityInterceptor" />
+	</bean>
+
+	<bean id="filterSecurityInterceptor"
+		class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
+		<property name="authenticationManager" ref="authenticationManager" />
+		<property name="accessDecisionManager" ref="accessDecisionManager" />
+		<property name="securityMetadataSource">
+			<security:filter-security-metadata-source>
+				<security:intercept-url pattern="/**" access="anyRole()" />
+		</security:filter-security-metadata-source>
+		</property>
+	</bean-->
+</beans>

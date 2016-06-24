@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -57,6 +59,10 @@ public class Quiz extends AbstractEntity implements Serializable {
 	
 	@Column(name="QUIZ_CODE")
 	private String quizCode;
+	
+	@Column(name="STATUS")
+	@Enumerated(EnumType.STRING)
+	private QuizStatus status = QuizStatus.START;
 	
 	public Long getId() {
 		return id;
@@ -129,5 +135,14 @@ public class Quiz extends AbstractEntity implements Serializable {
 	public void setQuizCode(String quizCode) {
 		this.quizCode = quizCode;
 	}
+
+	public QuizStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(QuizStatus status) {
+		this.status = status;
+	}
+	
 	
 }

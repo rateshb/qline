@@ -9,4 +9,6 @@ public interface QuizService {
 	Quiz load(Long id);
 
 	Quiz loadQuiz(String quizCode);
+
+	Quiz markCompleteQuiz(Quiz quiz);
 }
